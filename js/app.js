@@ -3,6 +3,14 @@
 // Initialize Model
 var placeData = [
 	{
+		name: 'Pikes Peak',
+		lat: 38.5026,
+		lng: -105.0239,
+		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pikespeak.JPG/2560px-Pikespeak.JPG',
+		imgAttribute: 'Wikipedia',
+		description: 'long desripction..'
+	},
+	{
 		name: 'Red Rocks Amphitheatre',
 		lat: 39.665278,
 		lng: -105.205833,
@@ -11,18 +19,18 @@ var placeData = [
 		description: 'long desripction..'
 	},
 	{
-		name: 'some location',
-		lat: 40,
-		lng: -105,
-		imgSrc: 'img/wat001.jpg',
-		imgAttribute: 'Wikipedia',
-		description: 'long desripction..'
+		name: 'Vail',
+		lat: 39.641107,
+		lng: -106.375712,
+		imgSrc: 'http://www.planetware.com/photos-large/USCO/colorado-vail-lake.jpg',
+		imgAttribute: 'Planetware',
+		description: 'Without a doubt, Vail can be a top destination ....'
 	},
 	{
-		name: 'some location',
-		lat: 40,
-		lng: -105.5,
-		imgSrc: 'img/wat001.jpg',
+		name: 'Coors Field',
+		lat: 39.761073,
+		lng: -104.993328,
+		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Coors_Field_July_2015.jpg/1920px-Coors_Field_July_2015.jpg',
 		imgAttribute: 'Wikipedia',
 		description: 'long desripction..'
 	},
@@ -78,8 +86,8 @@ var ViewModel = function() {
 	});
 	// Initialize Google Maps
   	this.map = new google.maps.Map(document.getElementById('map'), {
-        	center: {lat: 39.74, lng: -104.99},
-            zoom: 9,
+        	center: {lat: 39.34, lng: -104.09},
+            zoom: 8,
 			mapTypeControl: false,
 			streetViewControl: false
         });
