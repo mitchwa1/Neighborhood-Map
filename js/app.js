@@ -34,6 +34,14 @@ var placeData = [
 		imgAttribute: 'Wikipedia',
 		description: 'long desripction..'
 	},
+	{
+		name: 'Pearl Street Mall',
+		lat: 40.017863,
+		lng: -105.279952,
+		imgSrc: 'http://www.boulderdowntown.com/_img/dbi-pano1-warm-tone-1421x500-jessie.jpg',
+		imgAttribute: 'Boulder Downtown',
+		description: 'long desripction..'
+	},
 ];
 
 // Constructor for Place
