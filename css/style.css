@@ -74,7 +74,7 @@ h3 {
 
 .bBorder-div {
 	display: inline-block;
-	width:20%;
+	width: 20%;
 }
 
 .bBorder-div img{
@@ -133,14 +133,16 @@ h3 {
 	}
 
 	.info-content img {
-		width: auto;
+		display: block;
+		width: 325px;
 	    float: none;
 	    margin-right: 0;
 	}
 
+
 	.bBorder-div {
 		display: inline-block;
-		width:10%;
+		width: 10%;
 	}
 
 }
