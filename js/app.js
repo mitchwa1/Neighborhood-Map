@@ -163,7 +163,8 @@ ViewModel.prototype.renderMarkers = function(arrayInput) {
 ViewModel.prototype.deactivateAllMarkers = function() {
 	var markers = this.markers;
 	for (var i = 0; i < markers.length; i ++) {
-		markers[i].setIcon('img/map-pin-01.png');
+		//markers[i].setIcon('img/map-pin-01.png');
+		markers[i].setIcon();
 	}
 };
 
@@ -186,6 +187,7 @@ ViewModel.prototype.activateMarker = function(marker, context, infowindow, index
 		// Open targeted infowindow and change its icon.
 		infowindow.open(context.map, marker);
 		//marker.setIcon('img/map-pin-02.png');
+		marker.setIcon();
 	};
 };
 
@@ -203,4 +205,4 @@ ViewModel.prototype.updateContent = function(place){
 // Initialize Knockout View Model
 ko.applyBindings(new ViewModel());
 
-})();
+}) ();
