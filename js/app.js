@@ -4,8 +4,8 @@
 var placeData = [
 	{
 		name: 'Pikes Peak',
-		lat: 38.5026,
-		lng: -105.0239,
+		lat: 38.840532, 
+		lng: -105.044205,
 		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pikespeak.JPG/2560px-Pikespeak.JPG',
 		imgAttribute: 'Wikipedia',
 		description: 'long desripction..'
