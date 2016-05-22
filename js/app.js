@@ -3,7 +3,7 @@
 // Initialize Model
 var placeData = [
 	{
-		name: 'Pikes Peak',
+		name: 'Pikes Peak Mountain',
 		lat: 38.840532, 
 		lng: -105.044205,
 		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pikespeak.JPG/2560px-Pikespeak.JPG',
@@ -19,7 +19,7 @@ var placeData = [
 		description: 'Red Rocks Amphitheater is a rock structure located 10 miles west of Denver, where concerts are given in the open and outdoor environment. There are large rock formations surrounding the arena which notoriously gives this venue astounding views, and acoustics.  The arena holds seating for up to 9,525 people - plan to buy your tickets several months in advance, or pay the price!'
 	},
 	{
-		name: 'Vail',
+		name: 'Vail, CO',
 		lat: 39.641107,
 		lng: -106.375712,
 		imgSrc: 'http://www.planetware.com/photos-large/USCO/colorado-vail-lake.jpg',
@@ -27,7 +27,7 @@ var placeData = [
 		description: 'Without a doubt, Vail can be a top destination for pristine snow in the Rocky Mountains.  Try to avoid the "tourist" weekends by going during weekdays, or else face the consequences of a $200 lift ticket and 20-minute lift lines.'
 	},
 	{
-		name: 'Coors Field',
+		name: 'Coors Field ballpark',
 		lat: 39.761073,
 		lng: -104.993328,
 		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Coors_Field_July_2015.jpg/1920px-Coors_Field_July_2015.jpg',
@@ -41,6 +41,22 @@ var placeData = [
 		imgSrc: 'http://www.boulderdowntown.com/_img/dbi-pano1-warm-tone-1421x500-jessie.jpg',
 		imgAttribute: 'Boulder Downtown',
 		description: 'Pearl Street Mall is an outdoor pedestrian mall located in Boulder, CO.  The mall stretched 4 city blocks and can be a great place to shop, or grab a meal / drinks to enjoy the outdoor weather.  This mall is not an outlets haven, so be sure to bring your wallet.'
+	},
+	{
+		name: 'Snooze AM Eatery (Brunch)',
+		lat: 39.7556307,
+		lng: -105.0240295,
+		imgSrc: 'http://ollie.neglerio.com/wp-content/uploads/2011/10/snooze-denver-1.jpg',
+		imgAttribute: 'Ollie Neglerio',
+		description: 'Denver is known for Brunch.  Snooze is a (small) chain of restaurants focused on awesome brunch meals.  This is a perfect way to start a beautiful morning.  Make sure you get here early to avoid the wait on weekends!'
+	},
+	{
+		name: 'Garden of the Gods',
+		lat: 38.867769, 
+		lng: -104.891088,
+		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/7/73/Garden_of_the_Gods.JPG',
+		imgAttribute: 'Wikipedia - Corby Robert',
+		description: 'The Garden of the Gods Park is popular for hiking, rock climbing, horseback riding, road and mountain biking.  It attracts > 2 million visitors a year.  There are more than 15 miles of trails with trails that run through the heart of the park which is paved and wheelchair accessible - not mention, it is free!'
 	},
 ];
 
