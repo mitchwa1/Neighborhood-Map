@@ -8,7 +8,7 @@ var placeData = [
 		lng: -105.044205,
 		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pikespeak.JPG/2560px-Pikespeak.JPG',
 		imgAttribute: 'Wikipedia',
-		description: 'long desripction..'
+		description: 'Pikes Peak is one of Colorados 53 fourteeners (mountains that rise more than 14,000 feet) above sea level. The mountain rises 8,000 ft above downtown Colorado Springs. Pikes peak is one of the highest summits along the front range.  Pikes is also one of the few 14ers where you are able to drive to the top, and therefore a huge tourist attraction (similar to Mt. Evans).'
 	},
 	{
 		name: 'Red Rocks Amphitheatre',
@@ -16,7 +16,7 @@ var placeData = [
 		lng: -105.205833,
 		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/3/33/RedRocksAMP.png',
 		imgAttribute: 'Wikipedia',
-		description: 'long desripction..'
+		description: 'Red Rocks Amphitheater is a rock structure located 10 miles west of Denver, where concerts are given in the open and outdoor environment. There are large rock formations surrounding the arena which notoriously gives this venue astounding views, and acoustics.  The arena holds seating for up to 9,525 people - plan to buy your tickets several months in advance, or pay the price!'
 	},
 	{
 		name: 'Vail',
@@ -24,7 +24,7 @@ var placeData = [
 		lng: -106.375712,
 		imgSrc: 'http://www.planetware.com/photos-large/USCO/colorado-vail-lake.jpg',
 		imgAttribute: 'Planetware',
-		description: 'Without a doubt, Vail can be a top destination ....'
+		description: 'Without a doubt, Vail can be a top destination for pristine snow in the Rocky Mountains.  Try to avoid the "tourist" weekends by going during weekdays, or else face the consequences of a $200 lift ticket and 20-minute lift lines.'
 	},
 	{
 		name: 'Coors Field',
@@ -32,7 +32,7 @@ var placeData = [
 		lng: -104.993328,
 		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Coors_Field_July_2015.jpg/1920px-Coors_Field_July_2015.jpg',
 		imgAttribute: 'Wikipedia',
-		description: 'long desripction..'
+		description: 'Coors Field is a baseball park located in downtown Denver.  It is currently the home field of the Colorado Rockies.  The stadium can hold ~50,000 people and tickets are relatively inexpensive.  With amazing views of the Rocky Mountains and a great downtown location - a must see ball park!'
 	},
 	{
 		name: 'Pearl Street Mall',
@@ -40,7 +40,7 @@ var placeData = [
 		lng: -105.279952,
 		imgSrc: 'http://www.boulderdowntown.com/_img/dbi-pano1-warm-tone-1421x500-jessie.jpg',
 		imgAttribute: 'Boulder Downtown',
-		description: 'long desripction..'
+		description: 'Pearl Street Mall is an outdoor pedestrian mall located in Boulder, CO.  The mall stretched 4 city blocks and can be a great place to shop, or grab a meal / drinks to enjoy the outdoor weather.  This mall is not an outlets haven, so be sure to bring your wallet.'
 	},
 ];
 
