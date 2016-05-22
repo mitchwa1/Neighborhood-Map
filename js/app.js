@@ -92,8 +92,17 @@ var ViewModel = function() {
 		// Prepare content for Google Maps infowindow
 		self.updateContent(clickedPlace);
 		// Activate the selected marker to change icon.
-		// function(marker, context, infowindow, index)
-		self.activateMarker(self.markers[index], self, self.infowindow)();
+		//function(marker, context, infowindow, index){
+		//self.activateMarker(self.markers[index], self, self.infowindow)();
+		//}
+		/* function toggleBounce () {
+        if (marker.getAnimation() != null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+    */
 	};
 
     // Filter location name with value from search field.
@@ -110,7 +119,7 @@ var ViewModel = function() {
 	});
 	// Initialize Google Maps
   	this.map = new google.maps.Map(document.getElementById('map'), {
-        	center: {lat: 39.34, lng: -104.09},
+        	center: {lat: 39.34, lng: -105.09},
             zoom: 8,
 			mapTypeControl: false,
 			streetViewControl: false
@@ -130,6 +139,13 @@ var ViewModel = function() {
   	});
   	// Add event listener for map click event (when user click on other areas of the map beside of markers)
 	google.maps.event.addListener(self.map, 'click', function(event) {
+
+		// bounce when clicked on
+		//marker.toggleBounce();
+		self.info.setAnimation(google.maps.Animation.BOUNCE) //Markers will bounce when clicked
+        setTimeout(function() {
+        self.info.setAnimation(null)
+      }, 2000); 
 
 		// Every click change all markers icon back to defaults.
 		self.deactivateAllMarkers();
@@ -162,6 +178,7 @@ ViewModel.prototype.renderMarkers = function(arrayInput) {
 		var location = {lat: placeToShow[i].lat, lng: placeToShow[i].lng};
 		var marker = new google.maps.Marker({
 				map: this.map,
+				animation: google.maps.Animation.DROP, //new line
 				position: location,
 			});
 
@@ -172,19 +189,18 @@ ViewModel.prototype.renderMarkers = function(arrayInput) {
 
 		// add event listener for click event to the newly created marker
 		marker.addListener('click', this.activateMarker(marker, context, infowindow, i));
-  	}
+  	} 
 };
 
 // Set all marker icons back to default icons.
 ViewModel.prototype.deactivateAllMarkers = function() {
 	var markers = this.markers;
 	for (var i = 0; i < markers.length; i ++) {
-		//markers[i].setIcon('img/map-pin-01.png');
 		markers[i].setIcon();
 	}
 };
 
-// Set the target marker to change icon and open infowindow
+// Set the target marker and open infowindow
 // Call from user click on the menu list or click on the marker
 ViewModel.prototype.activateMarker = function(marker, context, infowindow, index) {
 	return function() {
@@ -194,16 +210,23 @@ ViewModel.prototype.activateMarker = function(marker, context, infowindow, index
 			var place = context.filteredItems()[index];
 			context.updateContent(place);
 		}
+
+		//ADDED
+		//marker.toggleBounce();
+
 		// closed opened infowindow
 		infowindow.close();
 
 		// deactivate all markers
 		context.deactivateAllMarkers();
 
+		
+
 		// Open targeted infowindow and change its icon.
 		infowindow.open(context.map, marker);
-		//marker.setIcon('img/map-pin-02.png');
-		marker.setIcon();
+
+		//ADDED
+		//setTimeout(toggleBounce, 1500);
 	};
 };
 
