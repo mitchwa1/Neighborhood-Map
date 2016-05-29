@@ -95,14 +95,14 @@ var ViewModel = function() {
 		//function(marker, context, infowindow, index){
 		//self.activateMarker(self.markers[index], self, self.infowindow)();
 		//}
-		/* function toggleBounce () {
-        if (marker.getAnimation() != null) {
+		// function toggleBounce () {
+        /*  if (marker.getAnimation() != null) {
             marker.setAnimation(null);
         } else {
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }
-    }
     */
+    
 	};
 
     // Filter location name with value from search field.
@@ -141,11 +141,21 @@ var ViewModel = function() {
 	google.maps.event.addListener(self.map, 'click', function(event) {
 
 		// bounce when clicked on
+		if (this.marker.getAnimation() !== null) {
+                    this.marker.setAnimation(null);
+                } else {
+                    this.marker.setAnimation(google.maps.Animation.BOUNCE);
+                    setTimeout(function() {
+                        this.marker.setAnimation(null);
+                    }, 1400);
+                }
 		//marker.toggleBounce();
-		self.info.setAnimation(google.maps.Animation.BOUNCE) //Markers will bounce when clicked
+		/*
+		self.info.setAnimation(google.maps.Animation.BOUNCE); //Markers will bounce when clicked
         setTimeout(function() {
         self.info.setAnimation(null)
       }, 2000); 
+*/
 
 		// Every click change all markers icon back to defaults.
 		self.deactivateAllMarkers();
@@ -159,7 +169,7 @@ var ViewModel = function() {
 // Method for clear all markers.
 ViewModel.prototype.clearMarkers = function() {
 	for (var i = 0; i < this.markers.length; i++) {
-		this.markers[i].setMap(null);
+		this.markers[i].setMap();
 	}
 		this.markers = [];
 };
@@ -214,19 +224,27 @@ ViewModel.prototype.activateMarker = function(marker, context, infowindow, index
 		//ADDED
 		//marker.toggleBounce();
 
-		// closed opened infowindow
-		infowindow.close();
+		// make marker bounce when clicked on
+		if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                } else {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+                setTimeout(function() {
+                    marker.setAnimation(null);
+                }, 1400);
+
+
+        infowindow.open(context.map, marker);
+
+        // closed opened infowindow - ERASED this so window could pop up
+		//infowindow.close();
 
 		// deactivate all markers
 		context.deactivateAllMarkers();
 
-		
-
-		// Open targeted infowindow and change its icon.
-		infowindow.open(context.map, marker);
-
-		//ADDED
-		//setTimeout(toggleBounce, 1500);
+	
+	
 	};
 };
 
