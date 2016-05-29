@@ -91,17 +91,6 @@ var ViewModel = function() {
 		var index = self.filteredItems().indexOf(clickedPlace);
 		// Prepare content for Google Maps infowindow
 		self.updateContent(clickedPlace);
-		// Activate the selected marker to change icon.
-		//function(marker, context, infowindow, index){
-		//self.activateMarker(self.markers[index], self, self.infowindow)();
-		//}
-		// function toggleBounce () {
-        /*  if (marker.getAnimation() != null) {
-            marker.setAnimation(null);
-        } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-    */
     
 	};
 
@@ -140,23 +129,6 @@ var ViewModel = function() {
   	// Add event listener for map click event (when user click on other areas of the map beside of markers)
 	google.maps.event.addListener(self.map, 'click', function(event) {
 
-		// bounce when clicked on
-		if (this.marker.getAnimation() !== null) {
-                    this.marker.setAnimation(null);
-                } else {
-                    this.marker.setAnimation(google.maps.Animation.BOUNCE);
-                    setTimeout(function() {
-                        this.marker.setAnimation(null);
-                    }, 1400);
-                }
-		//marker.toggleBounce();
-		/*
-		self.info.setAnimation(google.maps.Animation.BOUNCE); //Markers will bounce when clicked
-        setTimeout(function() {
-        self.info.setAnimation(null)
-      }, 2000); 
-*/
-
 		// Every click change all markers icon back to defaults.
 		self.deactivateAllMarkers();
 
@@ -164,7 +136,6 @@ var ViewModel = function() {
 	    self.infowindow.close();
 	});
 };
-
 
 // Method for clear all markers.
 ViewModel.prototype.clearMarkers = function() {
@@ -221,9 +192,6 @@ ViewModel.prototype.activateMarker = function(marker, context, infowindow, index
 			context.updateContent(place);
 		}
 
-		//ADDED
-		//marker.toggleBounce();
-
 		// make marker bounce when clicked on
 		if (marker.getAnimation() !== null) {
                     marker.setAnimation(null);
@@ -243,8 +211,6 @@ ViewModel.prototype.activateMarker = function(marker, context, infowindow, index
 		// deactivate all markers
 		context.deactivateAllMarkers();
 
-	
-	
 	};
 };
 
