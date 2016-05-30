@@ -57,7 +57,7 @@ var placeData = [
 		imgSrc: 'https://upload.wikimedia.org/wikipedia/commons/7/73/Garden_of_the_Gods.JPG',
 		imgAttribute: 'Wikipedia - Corby Robert',
 		description: 'The Garden of the Gods Park is popular for hiking, rock climbing, horseback riding, road and mountain biking.  It attracts > 2 million visitors a year.  There are more than 15 miles of trails with trails that run through the heart of the park which is paved and wheelchair accessible - not mention, it is free!'
-	},
+	}
 ];
 
 // Constructor for Place
@@ -91,17 +91,19 @@ var ViewModel = function() {
 		var index = self.filteredItems().indexOf(clickedPlace);
 		// Prepare content for Google Maps infowindow
 		self.updateContent(clickedPlace);
+		// NEW*** Invoke function for instagram API call
+		self.instagramImg(clickedPlace.lat, clickedPlace.lng);
     
 	};
 
-    // Filter location name with value from search field.
+    // Filter location name with value from search field entry
 	this.filteredItems = ko.computed(function() {
 	    var searchTerm = self.search().toLowerCase();
 	    if (!searchTerm) {
 	        return self.placeList();
 	    } else {
 	        return ko.utils.arrayFilter(self.placeList(), function(item) {
-	        	// return true if found the typed keyword, false if not found.
+	        	// return true if found the typed keyword, false otherwise
             	return item.name.toLowerCase().indexOf(searchTerm) !== -1;
 	        });
 	    }
@@ -140,7 +142,7 @@ var ViewModel = function() {
 // Method for clear all markers.
 ViewModel.prototype.clearMarkers = function() {
 	for (var i = 0; i < this.markers.length; i++) {
-		this.markers[i].setMap();
+		this.markers[i].setMap(null); //ADDED null
 	}
 		this.markers = [];
 };
@@ -148,7 +150,7 @@ ViewModel.prototype.clearMarkers = function() {
 // Method for render all markers.
 ViewModel.prototype.renderMarkers = function(arrayInput) {
 
-	// Clear old markers before render
+	// Clear prev markers before a render
 	this.clearMarkers();
 	var infowindow = this.infowindow;
 	var context = this;
@@ -160,7 +162,7 @@ ViewModel.prototype.renderMarkers = function(arrayInput) {
 		var marker = new google.maps.Marker({
 				map: this.map,
 				animation: google.maps.Animation.DROP, //new line
-				position: location,
+				position: location
 			});
 
 		this.markers.push(marker);
@@ -190,6 +192,7 @@ ViewModel.prototype.activateMarker = function(marker, context, infowindow, index
 		if (!isNaN(index)) {
 			var place = context.filteredItems()[index];
 			context.updateContent(place);
+			context.instagramImg(place.lat, place.lng); //New
 		}
 
 		// make marker bounce when clicked on
@@ -202,14 +205,15 @@ ViewModel.prototype.activateMarker = function(marker, context, infowindow, index
                     marker.setAnimation(null);
                 }, 1400);
 
+		// closed opened infowindow
+		infowindow.close();
 
-        infowindow.open(context.map, marker);
-
-        // closed opened infowindow - ERASED this so window could pop up
-		//infowindow.close();
-
-		// deactivate all markers
+		// deactivate all current markers
 		context.deactivateAllMarkers();
+
+		// Open targeted infowindow above marker location on map
+		infowindow.open(context.map, marker);
+		marker.setIcon();
 
 	};
 };
@@ -225,7 +229,84 @@ ViewModel.prototype.updateContent = function(place){
 	this.infowindow.setContent(html);
 };
 
+// Method for instagram API call
+ViewModel.prototype.instagramImg = function(lat, lng) {
+
+	// Prepare variable
+	var igLat = lat,
+		igLng = lng,
+		locationURLList = [],
+		imageObjList = [],
+		imageList = [],
+		infoBox = $('#ig-info'),
+		imgDiv = $('.ig-div');
+
+	// Remove old image and tell the user we're loading images.
+	imgDiv.remove();
+ 	infoBox.show().removeClass('bg-danger').addClass('bg-info').text("Loading..");
+
+ 	// Make AJAX call
+ 	// The first call will get an array of location ID. We have to use those ID to make url for call again to get real image objects
+	$.ajax({
+	    type: 'GET',
+	    dataType: 'jsonp',
+	    cache: true,
+	    url: 'https://api.instagram.com/v1/locations/search?lat=' + igLat.toString() + '&lng=' + igLng.toString() + '&distance=100&access_token=3284410013.1677ed0.835d955a8fcf4c79bfbfbfb05c18a0ef'
+	}).done(function(data){
+
+		// If request done, continue the next process
+		// loop through data from instagram and make URL for second call.
+	    for (var i = 0; i < data.data.length; i++) {
+	    	// Create target URL from location ID and push to the URL list array
+	        var targetURL = 'https://api.instagram.com/v1/locations/' + data.data[i].id + '/media/recent?access_token=3284410013.1677ed0.835d955a8fcf4c79bfbfbfb05c18a0ef';
+	        locationURLList.push(targetURL);
+	    }
+
+	    // Just 10 location URL is enough. When make a request to each URL, will get a lot of images.
+	    locationURLList = locationURLList.slice(0, 10);
+
+		// Make an AJAX call with each URL in array.
+		$.when.apply($, locationURLList.map(function(url) {
+		    return $.ajax({
+	            type: "GET",
+	            dataType: "jsonp",
+	            cache: true,
+	            url: url
+	        });
+		})).done(function() {
+
+			// If got all data from each URL then hide the info box.
+			infoBox.hide();
+
+			// Loop through returned data and make an array of image objects.
+		    for (var i = 0; i < arguments.length; i ++) {
+		        imageObjList.push.apply(imageObjList, arguments[i][0].data);
+		    }
+
+		    // We want only first 10 images to display.
+		    imageObjList = imageObjList.slice(0, 10);
+
+		    var imageContainer = $('<div>');
+
+		    // Append images to the page
+		    for (var j = 0; j < imageObjList.length; j ++) {
+		    	imageContainer.append('<div class="ig-div"><a href="' + imageObjList[j].link + '"><img src="' + imageObjList[j].images.low_resolution.url + '" /></a></div>');
+		    }
+
+		    $('#image-area').html(imageContainer);
+		});
+
+		// Do not display error message
+		clearTimeout(instagramRequestTimeout);
+	});
+
+	// But if there're any problem in the AJAX call process, tell the user.
+	var instagramRequestTimeout = setTimeout(function(){
+	    infoBox.removeClass('bg-info').addClass('bg-danger').text("Fail to get instagram resources");
+	}, 8000);
+};
+
 // Initialize Knockout View Model
 ko.applyBindings(new ViewModel());
 
-}) ();
+})();

@@ -64,7 +64,7 @@ h3 {
 	font-size: 12px;
 }
 
-.bBorder {
+.ig {
 	border-top: 10px solid #ff8080;
 	padding: 1em;
 	background: #d9d9d9;
@@ -72,12 +72,12 @@ h3 {
 	color: black;
 }
 
-.bBorder-div {
+.ig-div {
 	display: inline-block;
 	width: 20%;
 }
 
-.bBorder-div img{
+.ig-div img{
 	width:100%;
 }
 @media only screen and (min-width: 768px) {
@@ -140,7 +140,7 @@ h3 {
 	}
 
 
-	.bBorder-div {
+	.ig-div {
 		display: inline-block;
 		width: 10%;
 	}
